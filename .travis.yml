@@ -38,8 +38,8 @@ branches:
 
 before_install:
   # setup git config 
-  - git config --global user.name "embARC Automated Bot"
-  - git config --global user.email "Huaqi.Fang@synopsys.com"
+  - git config --global user.name "wangnuannuan"
+  - git config --global user.email "1961295051@qq.com"
   - >
     if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
       diff=$(git diff FETCH_HEAD master .ci)
