@@ -603,8 +603,8 @@ def comment_on_pull_request(comment):
 
     pr_number = os.environ.get("TRAVIS_PULL_REQUEST")
     slug = os.environ.get("TRAVIS_REPO_SLUG")
-    token = os.environ.get("GH_TOKEN")
-    request_config = [pr_number, slug, token, comment]
+    embarc_bot = os.environ.get("EMBARC_BOT").split(":")[-1]
+    request_config = [pr_number, slug, embarc_bot, comment]
     for i in range(len(request_config)):
         if request_config[i] == "false":
             request_config[i] = False
@@ -612,7 +612,7 @@ def comment_on_pull_request(comment):
         url = 'https://api.github.com/repos/{slug}/issues/{number}/comments'.format(
             slug=slug, number=pr_number)
         response = requests.post(url, data=json.dumps({'body': comment}),
-            headers={'Authorization': 'token ' + token})
+            headers={'Authorization': 'embarc_bot ' + embarc_bot})
         print(">>>>Travis send pull request comment to {}, repsonse status code {}.".format(url, response.status_code))
         return response.json()
 
